@@ -1,0 +1,73 @@
+<article class="tarjeta-principal">
+  <div class="columna-visual">
+    <div class="cabecera-id">
+      <span class="num-pokedex">#{{ pokemon.id }}</span>
+      <span class="badge-gen">{{ pokemon.generacion }}</span>
+    </div>
+
+    <img [src]="pokemon.imagen" [alt]="pokemon.nombre" class="sprite-oficial" />
+
+    <h2 class="titulo-poke">{{ pokemon.nombre | titlecase }}</h2>
+
+    <div class="tipos">
+      @for (tipo of pokemon.tipos; track tipo) {
+        <span class="tipo-pill" [attr.data-tipo]="tipo">{{ tipo | uppercase }}</span>
+      }
+    </div>
+
+    <p class="descripcion-especie">{{ pokemon.descripcion }}</p>
+
+    <div class="datos-fisicos">
+      <div><strong>Altura:</strong> {{ pokemon.altura }} m</div>
+      <div><strong>Peso:</strong> {{ pokemon.peso }} kg</div>
+      <div><strong>Hábitat:</strong> {{ pokemon.habitat | titlecase }}</div>
+      <div><strong>Captura:</strong> {{ pokemon.tasaCaptura }}/255</div>
+    </div>
+  </div>
+
+  <div class="columna-stats">
+    <div class="panel-entrenamiento">
+      <div class="estado-bar">
+        <span>Nivel actual: <strong>{{ nivel }}</strong></span>
+        <span>Energía: <strong>{{ energia }}%</strong></span>
+      </div>
+      <p class="log-mensaje">{{ mensajeAccion }}</p>
+      <div class="botones-entrenar">
+        <button type="button" class="btn-accion train" (click)="entrenar()" [disabled]="energia < 15 || nivel >= 100">
+          Entrenar (+5 Nvl)
+        </button>
+        <button type="button" class="btn-accion rest" (click)="descansar()" [disabled]="energia >= 100">
+          Descansar (+30%)
+        </button>
+        <button type="button" class="btn-accion reset" (click)="reiniciar()">
+          Reiniciar
+        </button>
+      </div>
+    </div>
+
+    <h3>Estadísticas (Base vs. Nivel {{ nivel }})</h3>
+    <div class="lista-stats">
+      @for (stat of pokemon.estadisticas; track stat.nombre) {
+        <div class="stat-item">
+          <div class="stat-label">
+            <span>{{ stat.nombre | uppercase }}</span>
+            <span>Base: {{ stat.base }} → <strong>{{ calcularStatReal(stat.base, stat.nombre) }}</strong></span>
+          </div>
+          <div class="barra-fondo">
+            <div
+              class="barra-relleno"
+              [style.width.%]="(calcularStatReal(stat.base, stat.nombre) / 350) * 100"
+            ></div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="habilidades-box">
+      <strong>Habilidades:</strong>
+      @for (hab of pokemon.habilidades; track hab) {
+        <span class="hab-tag">{{ hab | titlecase }}</span>
+      }
+    </div>
+  </div>
+</article>

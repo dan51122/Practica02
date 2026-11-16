@@ -1,0 +1,22 @@
+<section class="buscador-box">
+  <form class="fila-input" (ngSubmit)="enviarBusqueda()">
+    <input
+      type="text"
+      [(ngModel)]="terminoBusqueda"
+      name="terminoBusqueda"
+      placeholder="Escribe nombre o ID de Pokémon (ej. lucario, 25)..."
+      aria-label="Buscar Pokémon"
+    />
+    <button type="submit" class="btn-primario">Buscar</button>
+    <button type="button" class="btn-secundario" (click)="buscarAleatorio()">Aleatorio</button>
+  </form>
+
+  <div class="sugerencias">
+    <span>Consultas rápidas:</span>
+    @for (poke of sugeridos; track poke) {
+      <button type="button" class="chip" (click)="seleccionarRapido(poke)">
+        {{ poke }}
+      </button>
+    }
+  </div>
+</section>

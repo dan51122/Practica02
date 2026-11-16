@@ -1,0 +1,28 @@
+<div class="layout">
+  <header class="top-header">
+    <h1>PokéLab <span>Angular + PokéAPI</span></h1>
+    <p>Explorador interactivo de especies, estadísticas escalables y cadenas evolutivas</p>
+  </header>
+
+  <main>
+    <app-buscador (buscar)="cargarPokemon($event)"></app-buscador>
+
+    @if (cargando) {
+      <div class="estado-box cargando">
+        <div class="spinner"></div>
+        <p>Consultando PokéAPI (/pokemon, /pokemon-species y /evolution-chain)...</p>
+      </div>
+    } @else if (errorMensaje) {
+      <div class="estado-box error">
+        <strong>Error de consulta:</strong> {{ errorMensaje }}
+      </div>
+    } @else if (pokemonActual) {
+      <app-tarjeta-pokemon [pokemon]="pokemonActual"></app-tarjeta-pokemon>
+      <app-cadena-evolutiva
+        [evoluciones]="pokemonActual.evoluciones"
+        [actualNombre]="pokemonActual.nombre"
+        (seleccionarEvolucion)="cargarPokemon($event)"
+      ></app-cadena-evolutiva>
+    }
+  </main>
+</div>

@@ -1,0 +1,19 @@
+<section class="evo-contenedor">
+  <h3>Línea Evolutiva (haz clic para inspeccionar)</h3>
+  <div class="evo-lista">
+    @for (evo of evoluciones; track evo.id; let ultimo = $last) {
+      <button
+        type="button"
+        class="evo-card"
+        [class.activa]="evo.nombre === actualNombre"
+        (click)="elegir(evo.nombre)"
+      >
+        <img [src]="evo.imagen" [alt]="evo.nombre" />
+        <span>{{ evo.nombre | titlecase }}</span>
+      </button>
+      @if (!ultimo) {
+        <span class="flecha">→</span>
+      }
+    }
+  </div>
+</section>

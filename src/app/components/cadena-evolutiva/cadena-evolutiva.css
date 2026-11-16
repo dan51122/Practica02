@@ -1,0 +1,58 @@
+.evo-contenedor {
+  background: #181a27;
+  border: 1px solid #2c3049;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 24px;
+  color: #fff;
+}
+
+h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.05rem;
+  color: #ffcb05;
+}
+
+.evo-lista {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.evo-card {
+  background: #11131f;
+  border: 2px solid #2c3049;
+  border-radius: 12px;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.evo-card:hover {
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+.evo-card.activa {
+  border-color: #ffcb05;
+  background: #1e2235;
+}
+
+.evo-card img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+}
+
+.flecha {
+  font-size: 1.5rem;
+  color: #64748b;
+  font-weight: bold;
+}
